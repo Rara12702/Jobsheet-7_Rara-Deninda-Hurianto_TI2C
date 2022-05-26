@@ -10,8 +10,11 @@ use Illuminate\Notifications\Notifiable;
 
 class Mahasiswa extends Model //Definisi Model
 {
-    protected $table='mahasiswa'; // Eloquent akan membuat model mahasiswa menyimpan record ditabel mahasiswa
-    protected $primaryKey = 'id_mahasiswa'; // Memanggil isi DB Dengan primarykey
+    protected $table='mahasiswa'; //eloquent akan membuat model mahasiswa menyimpan record di tabel mahasiswa
+    protected $primaryKey='nim'; //memamnggil isi DB dengan primay key
+    
+    //js 7
+    //protected $primaryKey = 'id_mahasiswa'; // Memanggil isi DB Dengan primarykey
     /**
     * The attributes that are mass assignable.
     **
@@ -19,15 +22,19 @@ class Mahasiswa extends Model //Definisi Model
     */
 
         protected $fillable = [
-        'Nim',
-        'Nama',
-        'Kelas',
-        'Jurusan',
-        'Email',
-        'Alamat',
-        'Tanggal_lahir',
+            'nim',
+            'nama',
+            'kelas_id',
+            'jurusan',
+            'email',
+            'alamat',
+            'tanggal_lahir',
     ];
 
+    public function kelas(){
+        return $this->belongsTo(Kelas::class);
+    }
+    
     // for search
     public static function getByNim($Nim)
     {
